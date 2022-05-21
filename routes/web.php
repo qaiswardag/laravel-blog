@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\File;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +15,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// home
 Route::get('/', function () {
-    return view('posts');
+
+    $posts = Post::all();
+
+
+    return view('posts', [
+        'posts' => $posts
+    ]);
 });
 
 //
-Route::get('/post', function () {
+//
+//
+//
+//
+//
+//
+//
+//
+// post
+Route::get('/posts/{post}', function ($id) {
+    // find a post by its slug and pass it to a view called "post"
+    $post = Post::findOrFail($id);
+
     return view('post', [
-        'post' => file_get_contents()
+        'post' => $post
     ]);
+
 });
