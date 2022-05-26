@@ -1,0 +1,4 @@
+1. query
+select * from posts where exists (select * from categories where categories.id = posts.category_id and categories.slug = 'a-slug');
+
+

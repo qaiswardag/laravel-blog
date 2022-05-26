@@ -1,9 +1,12 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Facades\File;
-use App\Models\Post;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Category;
+use App\Models\User;
+
+//use App\Models\Post;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,39 +16,86 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "web" middleware group. Now create something great
 |
 */
 
 // home
-Route::get('/', function () {
-    return view('posts', [
-        'posts' => Post::latest()->get()
-    ]);
-});
+Route::get('/', [PostController::class, 'index'])->name('home');
+// posts
+Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
+// register
+Route::get('register', [RegisterController::class, 'create']);
+Route::post('register', [RegisterController::class, 'store']);
 
-// post
-Route::get('/posts/{post:slug}', function (Post $post) {
-    return view('post', [
-        'post' => $post
-    ]);
-
-});
-
-// category
-Route::get('/categories/{category:slug}', function (Category $category) {
-    $posts = Post::all();
-    return view('posts', [
-        'posts' => $category->posts
-    ]);
-});
+//// categories
+//Route::get('/categories/{category:slug}', function (Category $category) {
+//    return view('posts', [
+//        'posts' => $category->posts,
+//        'currentCategory' => $category,
+//        'categories' => Category::all()
+//    ]);
+//})->name('category');
 
 
 // author
-Route::get('/authors/{author:username}', function (User $author) {
-    $posts = Post::all();
-    return view('posts', [
-        'posts' => $author->posts
-    ]);
-});
+//Route::get('/authors/{author:username}', function (User $author) {
+//    return view('posts.index', [
+//        'posts' => $author->posts
+//    ]);
+//});
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
