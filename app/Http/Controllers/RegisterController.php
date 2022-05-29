@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use function auth;
+use function request;
+use function session;
 
-use Illuminate\Http\Request;
-use function bcrypt;
-use function redirect;
 
 class RegisterController extends Controller
 {
@@ -15,17 +15,20 @@ class RegisterController extends Controller
         return view('register.create');
     }
 
+
     public function store()
     {
         // create the user
-        $attributes = request()->validate([
-            'name' => ['required', 'max:255'],
-            'username' => ['required', 'max:255', 'min:3'],
-            'email' => ['required', 'email', 'max:255'],
+        $validated = request()->validate([
+            'name' => ['required', 'min:4', 'max:255'],
+            'username' => ['required', 'min:4', 'max:255', 'unique:users,username'],
+            'email' => ['required', 'max:255', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6', 'max:255']
         ]);
 
-        $attributes['password'] = bcrypt($attributes['password']);
+        // hash password
+        // ref. check User Model
+        // method: setPasswordAttribute
 
         // if validation fails Laravel will redirect back to previous page
 
@@ -33,9 +36,17 @@ class RegisterController extends Controller
         // var_dump(request()->all());
 
         // if validation is success
-        User::create($attributes);
+        // create user in database
+        $user = User::create($validated);
 
-        return redirect('/');
+
+        // log user in
+        auth()->login($user);
+
+        // message apears only until next page request
+        // session()->flash('success', 'Your account have been created');
+        // redirect with a pice of data
+        return redirect('/')->with('success', 'Your account have been created');
 
     }
 }

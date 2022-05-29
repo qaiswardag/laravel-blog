@@ -2,26 +2,10 @@
     <section class="px-6 py-8">
         <main class="max-w-lg mx-auto mt-10">
             <x-panel>
-                <h1 class="text-center font-bold text-xl">Register!</h1>
+                <h1 class="text-center font-bold text-xl">Log in!</h1>
 
-                <form method="POST" action="/register" class="mt-10">
+                <form method="POST" action="/login" class="mt-10">
                     @csrf
-
-                    <p class="mt-8">name</p>
-                    <input type="text" name="name" value="{{old('name')}}"
-                           class="border border-gray-200 p-2 w-full rounded" autocomplete="off">
-                    @error('name')
-                    <p class="text-red-500 text-sm mt2">{{$message}}</p>
-                    @enderror
-
-
-                    <p class="mt-8">username</p>
-                    <input type="text" name="username" value="{{old('username')}}" class="border border-gray-200 p-2
-                           w-full rounded"
-                           autocomplete="off">
-                    @error('username')
-                    <p class="text-red-500 text-sm mt2">{{$message}}</p>
-                    @enderror
 
                     <p class="mt-8">email</p>
                     <input type="email" name="email" value="{{old('email')}}" class=" border border-gray-200 p-2 w-full
@@ -30,6 +14,7 @@
                     @error('email')
                     <p class="text-red-500 text-sm mt2">{{$message}}</p>
                     @enderror
+
 
                     <p class="mt-8">password</p>
                     <input type="password" name="password" value="{{old('password')}}" class=" border border-gray-200 p-2
@@ -40,7 +25,7 @@
                     @enderror
 
 
-                    <input type="submit" name="submit" value="Register"
+                    <input type="submit" name="submit" value="login"
                            class="cursor-pointer bg-blue-500 text-white uppercase font-semibold text-xs py-4 px-10 rounded hover:bg-blue-600 mt-8">
 
 

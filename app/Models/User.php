@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use function ucwords;
 
 class User extends Authenticatable
 {
@@ -44,6 +45,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // everytime we are getting name it will return as in this function
+    // will get name from db and return below
+    public function getnameAttribute($username)
+    {
+        // return 'John Doe';
+        return ucwords($username);
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
 
     public function posts()
     {
