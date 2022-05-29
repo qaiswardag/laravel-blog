@@ -23,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 // home
 Route::get('/', [PostController::class, 'index'])->name('home');
-// posts
+
+// post
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
 // register
@@ -37,6 +38,7 @@ Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 
 // middleware: user have to be logged in — in order to reach logout endpoint
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
 
 
 

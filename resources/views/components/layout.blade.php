@@ -64,5 +64,8 @@
         </div>
     </footer>
 </section>
+<div id="app">
+
+</div>
 <x-flash></x-flash>
 </body>
