@@ -26,6 +26,7 @@
                 <a href="/login" class="text-xs font-bold uppercase">{{auth()->user()->name}}</a>
 
                 <a href="/admin/posts/create" class="text-xs font-bold uppercase">Create Post</a>
+                <a href="/admin/posts" class="text-xs font-bold uppercase">Manage Posts</a>
 
                 <form method="POST" action="/logout" class="text-xs">
                     @csrf
