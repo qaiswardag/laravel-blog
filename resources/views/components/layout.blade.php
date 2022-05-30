@@ -25,11 +25,14 @@
             @auth()
                 <a href="/login" class="text-xs font-bold uppercase">{{auth()->user()->name}}</a>
 
+                <a href="/admin/posts/create" class="text-xs font-bold uppercase">Create Post</a>
+
                 <form method="POST" action="/logout" class="text-xs">
                     @csrf
                     <button type="submit" class="text-xs font-bold uppercase">logout</button>
                 </form>
             @endauth()
+
 
         </div>
     </nav>

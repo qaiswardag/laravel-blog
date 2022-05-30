@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use function auth;
 use function request;
 use function session;
@@ -20,10 +21,10 @@ class RegisterController extends Controller
     {
         // create the user
         $validated = request()->validate([
-            'name' => ['required', 'min:4', 'max:255'],
-            'username' => ['required', 'min:4', 'max:255', 'unique:users,username'],
-            'email' => ['required', 'max:255', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:6', 'max:255']
+            'name' => ['required', 'min:1', 'max:255'],
+            'username' => ['required', 'min:1', 'max:255'],
+            'email' => ['required', 'max:255', 'email', Rule::unique('users', 'email')],
+            'password' => ['required', 'min:1', 'max:255']
         ]);
 
         // hash password

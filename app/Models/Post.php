@@ -39,13 +39,21 @@ class Post extends Model
     }
 
 
+    // grap comment associated with the post
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // grap category associated with the post
     public function category()
     {
         // hasOne, hasMany, belongsTO, belongsToMany
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
 
     }
 
+    // grap author associated with the post
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
