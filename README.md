@@ -43,6 +43,65 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging
 into our comprehensive video library.
 
+## Installing Vue to Laravel project
+1. npm install
+```
+npm install --save vue@next vue-router@next && npm install --save-dev vue-loader@next
+```
+
+
+2. Insert below in webpack.mix.js file:
+```
+mix.js('resources/js/app.js', 'public/js')
+    .vue()
+    .postCss('resources/css/app.css', 'public/css', [
+        //
+]);
+````
+
+
+3. Create a Vue 3 component:
+In directory resources/js create a directory named "vue" and another directory named "components"
+Inside "components" create a vue file. Example "Posts.vue"
+
+
+4. Import Vue to the Laravel javascript file. Open app.js file and insert below:
+```
+import './bootstrap';
+import {createApp} from 'vue'
+import router from './vue/router'
+
+
+// import vue components
+import Posts from "./vue/components/Posts";
+
+// create app
+createApp({
+    components: {
+        'posts': Posts,
+    }
+})
+    .use(router)
+    .mount('#app')
+```
+
+
+5. Prepare Blade for Vue:
+```
+<div id="app">
+ <div>
+    <posts></posts>
+ </div>
+</div>
+```
+</div>
+
+
+
+6. in terminal run: npm run watch
+
+
+
 ## Laravel Sponsors
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in
